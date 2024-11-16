@@ -9,17 +9,25 @@ class CartPage extends StatefulWidget {
 
 class _CartPageState extends State<CartPage> {
   // Simulating quantities and prices for each cart item
-  List<int> quantities = [1, 1, 1, 1, 1, 1];
-  List<double> prices = [225.00, 300.00, 150.00, 250.00, 275.00, 100.00];
+  List<int> quantities = [ 1, 1, 1];
+  List<double> prices = [2100000, 3000000, 1500000];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: true, // Will show the back button
-        title: Text('Your Cart'),
-        backgroundColor: Color(0xFFD3A335), // Matches the gold/orange theme
+        backgroundColor: Color(0xFFD3A335),
+        centerTitle: true,
+        title: Text(
+          "Cart",
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: const Color.fromARGB(255, 0, 0, 0),
+          ),
+        ),
       ),
+      backgroundColor: Colors.white,
       body: Column(
         children: [
           Expanded(
@@ -31,7 +39,7 @@ class _CartPageState extends State<CartPage> {
               ),
             ),
           ),
-          _buildTotalSection(), // Display total section at the bottom
+          _buildTotalSection(),
         ],
       ),
       bottomNavigationBar: Padding(
@@ -41,12 +49,13 @@ class _CartPageState extends State<CartPage> {
             // Handle checkout
           },
           style: ElevatedButton.styleFrom(
-            primary: Color(0xFFD3A335),
-            padding: EdgeInsets.symmetric(vertical: 16.0),
+            backgroundColor: Color(0xFFD3A335),
+            padding: EdgeInsets.symmetric(vertical: 8.0),
           ),
           child: Text(
             'CHECK OUT',
             style: TextStyle(fontSize: 18),
+            selectionColor: Colors.white,
           ),
         ),
       ),
@@ -80,7 +89,7 @@ class _CartPageState extends State<CartPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text('Sneakers', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                Text('\$${prices[index]}'),
+                Text('\IDR${prices[index]}'),
                 Text('Size: US 7'),
               ],
             ),
@@ -134,7 +143,7 @@ class _CartPageState extends State<CartPage> {
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
           Text(
-            '\$${totalPrice.toStringAsFixed(2)}', // Dynamically display total price
+            '\IDR${totalPrice.toStringAsFixed(1)}', // Dynamically display total price
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
         ],

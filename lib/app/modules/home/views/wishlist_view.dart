@@ -17,43 +17,42 @@ class WishlistPage extends StatefulWidget {
 }
 
 class _WishlistPageState extends State<WishlistPage> {
-  void _removeFromWishlist(WishlistItem item) {
+  void _removeFromWishlist(int index) {
     setState(() {
-      widget.wishlist.remove(item);
+      widget.wishlist.removeAt(index);
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Color(0xFFD3A335),
-        title: Text('Wishlist', style: TextStyle(color: Colors.black)),
+        centerTitle: true,
+        title: Text(
+          "Wishlist",
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: const Color.fromARGB(255, 0, 0, 0),
+          ),
+        ),
       ),
-      body: widget.wishlist.isEmpty
-          ? Center(child: Text('Your wishlist is currently empty.'))
-          : ListView.builder(
-              itemCount: widget.wishlist.length,
-              itemBuilder: (context, index) {
-                return Card(
-                  child: ListTile(
-                    leading: Image.asset(
-                      widget.wishlist[index].imagePath,
-                      width: 50,
-                      height: 50,
-                      fit: BoxFit.cover,
-                    ),
-                    title: Text(widget.wishlist[index].name),
-                    trailing: IconButton(
-                      icon: Icon(Icons.delete, color: Colors.red),
-                      onPressed: () {
-                        _removeFromWishlist(widget.wishlist[index]);
-                      },
-                    ),
-                  ),
-                );
-              },
+      body: ListView.builder(
+        itemCount: widget.wishlist.length,
+        itemBuilder: (context, index) {
+          final item = widget.wishlist[index];
+          return ListTile(
+            leading: Image.asset(item.imagePath, width: 50, height: 50),
+            title: Text(item.name),
+            trailing: IconButton(
+              icon: Icon(Icons.delete, color: Colors.red),
+              onPressed: () => _removeFromWishlist(index),
             ),
+          );
+        },
+      ),
     );
   }
 }

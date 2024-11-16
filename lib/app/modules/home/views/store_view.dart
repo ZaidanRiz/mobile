@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/app/modules/home/views/cart_view.dart';
-import 'package:flutter_application_1/app/modules/home/views/chat_view.dart';
-import 'package:flutter_application_1/app/modules/home/views/profile_view.dart';
-import 'package:flutter_application_1/app/modules/home/views/wishlist_view.dart';
+import 'package:flutter_application_1/app/modules/home/controllers/store_controller.dart';
 import 'package:get/get.dart';
-import '../../http_screen/views/http_view.dart'; // Import the new ArticlePage
+import '../../http_screen/views/http_view.dart';
+import 'cart_view.dart';
+import 'chat_view.dart';
+import 'profile_view.dart';
+import 'wishlist_view.dart';
 
 class StorePage extends StatefulWidget {
   @override
@@ -12,228 +13,222 @@ class StorePage extends StatefulWidget {
 }
 
 class _StorePageState extends State<StorePage> {
+  final StoreController homeController = Get.put(StoreController());
   List<WishlistItem> wishlist = [];
-  int _currentIndex = 0; // Track the current index
 
   void _addToWishlist(String name, String imagePath) {
     setState(() {
       wishlist.add(WishlistItem(name: name, imagePath: imagePath));
+      Get.snackbar(
+        "Wishlist", 
+        "$name telah ditambahkan ke wishlist!",
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Colors.white,
+        colorText: Colors.black,
+        duration: Duration(seconds: 2),
+      );
     });
-  }
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _currentIndex = index; // Update the current index
-    });
-    switch (index) {
-      case 0:
-        // Home Page - This is the current page, do nothing
-        break;
-      case 1:
-        // Navigate to Wishlist
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => WishlistPage(wishlist: wishlist),
-          ),
-        );
-        break;
-      case 2:
-        // Navigate to CartPage
-        Get.to(CartPage());
-        break;
-    }
   }
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () async => false, // Disable back button
+      onWillPop: () async => false,
       child: Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          backgroundColor: Color(0xFFD3A335),
-          elevation: 0,
-          title: Text("Sneaker Space"),
-          actions: [
-            GestureDetector(
-              onTap: () {
-                Get.to(ProfilePage(), arguments: {
-                  'username': 'Fazza',
-                  'email': 'fazzazevana@gmail.com',
-                });
-              },
-              child: CircleAvatar(
-                radius: 20,
-                backgroundImage: AssetImage('assets/default_profile_picture.png'),
-              ),
-            ),
-            SizedBox(width: 16),
-            GestureDetector(
-              onTap: () {
-                Get.to(ChatPage()); // Navigate to ChatPage
-              },
-              child: Padding(
-                padding: const EdgeInsets.only(right: 16.0),
-                child: Icon(
-                  Icons.chat,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-          ],
-        ),
-        body: SingleChildScrollView(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Search bar
-              TextField(
-                decoration: InputDecoration(
-                  hintText: 'What are you looking for ?',
-                  prefixIcon: Icon(Icons.search),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                  filled: true,
-                  fillColor: Colors.grey[200],
-                ),
-              ),
-              SizedBox(height: 16),
-              // Banner
-              Container(
-                width: double.infinity,
-                padding: EdgeInsets.all(16.0),
-                decoration: BoxDecoration(
-                  border: Border.all(width: 1, color: Colors.black),
-                  color: const Color.fromARGB(255, 255, 255, 255),
-                  borderRadius: BorderRadius.circular(12.0),
-                ),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Air Jordan 1 X Travis Scoot",
-                            style: TextStyle(
-                              color: const Color.fromARGB(255, 0, 0, 0),
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          SizedBox(height: 8),
-                          Text(
-                            "DISCOUNT 20%",
-                            style: TextStyle(
-                              color: Color.fromARGB(255, 0, 0, 0),
-                              fontSize: 16,
-                            ),
-                          ),
-                          SizedBox(height: 16),
-                          ElevatedButton(
-                            onPressed: () {},
-                            style: ElevatedButton.styleFrom(
-                              primary: Color(0xFFD3A335),
-                            ),
-                            child: Text("Shop Now"),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(width: 16),
-                    Image.asset(
-                      'assets/Jordan-1-High-OG-Travis-Scott-x-Fragment-1.png',
-                      width: 150,
-                      height: 150,
-                      fit: BoxFit.cover,
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(height: 24),
-              // Brand Section
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Brand",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: () {},
-                    child: Text("See all"),
-                  ),
-                ],
-              ),
-              SizedBox(height: 8),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  _buildBrandIcon('assets/puma.png'),
-                  _buildBrandIcon('assets/nike.png'),
-                  _buildBrandIcon('assets/adidas.png'),
-                  _buildBrandIcon('assets/reebok.png'),
-                ],
-              ),
-              SizedBox(height: 24),
-              // New Arrival Section
-              Text(
-                "New Arrival",
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              SizedBox(height: 16),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  _buildProductCard('Nike Air Force 1', 'assets/air-force-1-low-x-peaceminusone.jpg', 6700000, 4.7),
-                  _buildProductCard('Adidas NMD', 'assets/adidas-nmd-r1.jpg', 2800000, 4.9),
-                ],
-              ),
-              SizedBox(height: 24), // Add space for Visit Article Button
-              Center(
-                child: ElevatedButton(
-                  onPressed: () {
-                    Get.to(HttpView()); // Navigate to ArticlePage
-                  },
-                  style: ElevatedButton.styleFrom(
-                    primary: Color(0xFFD3A335), // Same color as theme
-                  ),
-                  child: Text('Visit Article'),
-                ),
-              ),
-            ],
+        backgroundColor: Colors.white,
+        body: Obx(() {
+          switch (homeController.currentIndex.value) {
+            case 1:
+              return WishlistPage(wishlist: wishlist);
+            case 2:
+              return CartPage();
+            default:
+              return _buildHomePage(context);
+          }
+        }),
+        bottomNavigationBar: Obx(() => BottomNavigationBar(
+              currentIndex: homeController.currentIndex.value,
+              onTap: (index) => homeController.changePage(index),
+              selectedItemColor: Color(0xFFD3A335),
+              unselectedItemColor: Colors.grey,
+              backgroundColor: Colors.white,
+              items: [
+                BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+                BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Wishlist'),
+                BottomNavigationBarItem(icon: Icon(Icons.shopping_cart), label: 'Cart'),
+              ],
+            )),
+      ),
+    );
+  }
+
+  Widget _buildHomePage(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: Color(0xFFD3A335),
+        elevation: 0,
+        centerTitle: true,
+        title: Text(
+          "Sneaker Space",
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: Color.fromARGB(255, 23, 23, 23),
           ),
         ),
-        bottomNavigationBar: BottomNavigationBar(
-          currentIndex: _currentIndex, // Set the current index
-          onTap: _onItemTapped, // Handle taps
-          selectedItemColor: Color(0xFFD3A335), // Gold Color
-          unselectedItemColor: Colors.grey,
-          items: [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
+        leading: GestureDetector(
+          onTap: () {
+            Get.to(ChatPage());
+          },
+          child: Padding(
+            padding: const EdgeInsets.only(left: 16.0),
+            child: Icon(
+              Icons.chat,
+              color: Colors.white,
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.favorite),
-              label: 'Favorites',
+          ),
+        ),
+        actions: [
+          GestureDetector(
+            onTap: () {
+              Get.to(ProfilePage(), arguments: {
+                });
+            },
+            child: CircleAvatar(
+              radius: 16,
+              backgroundColor: Colors.transparent,
+              child: Icon(Icons.person, color: Colors.white),
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.shopping_cart),
-              label: 'Cart',
+          ),
+          SizedBox(width: 16),
+        ],
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            TextField(
+              decoration: InputDecoration(
+                hintText: 'What are you looking for?',
+                prefixIcon: Icon(Icons.search),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
+                filled: true,
+                fillColor: Colors.grey[200],
+              ),
+            ),
+            SizedBox(height: 16),
+            _buildBanner(),
+            SizedBox(height: 24),
+            _buildBrandSection(),
+            SizedBox(height: 24),
+            _buildNewArrivalSection(),
+            SizedBox(height: 24),
+            Center(
+              child: ElevatedButton(
+                onPressed: () {
+                  Get.to(HttpView());
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(0xFFD3A335),
+                ),
+                child: Text('Visit Article'),
+              ),
             ),
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildBanner() {
+    return Container(
+      width: double.infinity,
+      padding: EdgeInsets.all(16.0),
+      decoration: BoxDecoration(
+        border: Border.all(width: 1, color: Colors.black),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12.0),
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Air Jordan 1 X Travis Scott",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 8),
+                Text(
+                  "DISCOUNT 20%",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                  ),
+                ),
+                SizedBox(height: 16),
+                ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color(0xFFD3A335),
+                  ),
+                  child: Text("Shop Now"),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(width: 16),
+          Image.asset(
+            'assets/Jordan-1-High-OG-Travis-Scott-x-Fragment-1.png',
+            width: 150,
+            height: 150,
+            fit: BoxFit.cover,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildBrandSection() {
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              "Brand",
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            TextButton(
+              onPressed: () {},
+              child: Text("See all"),
+            ),
+          ],
+        ),
+        SizedBox(height: 8),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            _buildBrandIcon('assets/puma.png'),
+            _buildBrandIcon('assets/nike.png'),
+            _buildBrandIcon('assets/adidas.png'),
+            _buildBrandIcon('assets/reebok.png'),
+          ],
+        ),
+      ],
     );
   }
 
@@ -256,10 +251,33 @@ class _StorePageState extends State<StorePage> {
     );
   }
 
+  Widget _buildNewArrivalSection() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "New Arrival",
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        SizedBox(height: 16),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            _buildProductCard('Nike Air Force 1', 'assets/air-force-1-low-x-peaceminusone.jpg', 6700000, 4.7),
+            _buildProductCard('Adidas NMD', 'assets/adidas-nmd-r1.jpg', 2800000, 4.9),
+          ],
+        ),
+      ],
+    );
+  }
+
   Widget _buildProductCard(String title, String assetPath, int price, double rating) {
     return Container(
       width: 150,
-      height: 250,
+      height: 300,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12.0),
@@ -312,12 +330,15 @@ class _StorePageState extends State<StorePage> {
               ),
             ],
           ),
-          SizedBox(height: 4),
+          SizedBox(height: 8),
           ElevatedButton(
             onPressed: () {
               _addToWishlist(title, assetPath);
             },
-            child: Text('Add to Wishlist'),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Color(0xFFD3A335),
+            ),
+            child: Text("Add to Wishlist"),
           ),
         ],
       ),

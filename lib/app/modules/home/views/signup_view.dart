@@ -1,11 +1,29 @@
-// lib/features/sign_up/sign_up_page.dart
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/app/modules/home/controllers/auth_controller.dart';
 import 'package:get/get.dart';
 
-class SignUpPage extends StatelessWidget {
+class SignUpPage extends StatefulWidget {
+  @override
+  _SignUpPageState createState() => _SignUpPageState();
+}
+
+class _SignUpPageState extends State<SignUpPage> {
+  final AuthController _authController =
+      Get.put(AuthController()); // Integrate AuthController
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -38,6 +56,7 @@ class SignUpPage extends StatelessWidget {
             SizedBox(height: 32),
             // Email field
             TextField(
+              controller: _emailController,
               decoration: InputDecoration(
                 labelText: 'Email',
                 prefixIcon: Icon(Icons.email),
@@ -45,17 +64,9 @@ class SignUpPage extends StatelessWidget {
               ),
             ),
             SizedBox(height: 16),
-            // Username field
-            TextField(
-              decoration: InputDecoration(
-                labelText: 'Username',
-                prefixIcon: Icon(Icons.person),
-                border: OutlineInputBorder(),
-              ),
-            ),
-            SizedBox(height: 16),
             // Password field
             TextField(
+              controller: _passwordController,
               obscureText: true,
               decoration: InputDecoration(
                 labelText: 'Password',
@@ -69,14 +80,10 @@ class SignUpPage extends StatelessWidget {
               children: [
                 Checkbox(
                   value: true,
-                  onChanged: (value) {
-                    // Handle terms checkbox here
-                  },
+                  onChanged: (value) {},
                 ),
                 GestureDetector(
-                  onTap: () {
-                    // Handle terms click
-                  },
+                  onTap: () {},
                   child: Text(
                     "Agree to our Terms & Conditions",
                     style: TextStyle(
@@ -88,29 +95,37 @@ class SignUpPage extends StatelessWidget {
             ),
             SizedBox(height: 16),
             // Sign up button
-            ElevatedButton(
-              onPressed: () {
-                // Add sign up action here
-              },
-              style: ElevatedButton.styleFrom(
-                primary: Color(0xFFD3A335), // Gold color
-                padding: EdgeInsets.symmetric(horizontal: 100, vertical: 16),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text("SIGN UP"),
-                  SizedBox(width: 8),
-                  Icon(Icons.arrow_forward),
-                ],
-              ),
-            ),
+            Obx(() {
+              return ElevatedButton(
+                onPressed: _authController.isLoading.value
+                    ? null
+                    : () {
+                        _authController.registerUser(
+                          _emailController.text,
+                          _passwordController.text,
+                        );
+                      },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(0xFFD3A335), // Gold color
+                  padding: EdgeInsets.symmetric(horizontal: 100, vertical: 16),
+                ),
+                child: _authController.isLoading.value
+                    ? CircularProgressIndicator()
+                    : Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text("SIGN UP"),
+                          SizedBox(width: 8),
+                          Icon(Icons.arrow_forward),
+                        ],
+                      ),
+              );
+            }),
             SizedBox(height: 16),
-            // Already have an account ? Sign in text
+            // Already have an account? Sign in text
             TextButton(
               onPressed: () {
-                // Navigate back to login page
-                Get.back();
+                Get.back(); // Navigate back to login page
               },
               child: Text.rich(
                 TextSpan(

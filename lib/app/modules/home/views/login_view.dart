@@ -1,13 +1,29 @@
-// lib/features/login/login_page.dart
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/app/modules/home/controllers/auth_controller.dart';
 import 'package:flutter_application_1/app/modules/home/views/signup_view.dart';
-import 'package:flutter_application_1/app/modules/home/views/store_view.dart';
 import 'package:get/get.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final AuthController _authController = Get.put(AuthController());
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -38,10 +54,11 @@ class LoginPage extends StatelessWidget {
               ),
             ),
             SizedBox(height: 32),
-            // Username or Email field
+            // Email field
             TextField(
+              controller: _emailController,
               decoration: InputDecoration(
-                labelText: 'Username or Email',
+                labelText: 'Email',
                 prefixIcon: Icon(Icons.person),
                 border: OutlineInputBorder(),
               ),
@@ -49,6 +66,7 @@ class LoginPage extends StatelessWidget {
             SizedBox(height: 16),
             // Password field
             TextField(
+              controller: _passwordController,
               obscureText: true,
               decoration: InputDecoration(
                 labelText: 'Password',
@@ -57,30 +75,37 @@ class LoginPage extends StatelessWidget {
               ),
             ),
             SizedBox(height: 24),
-            // Sign in button
-            ElevatedButton(
-              onPressed: () {
-                // Navigate to store page after login
-                Get.to(StorePage());
-              },
-              style: ElevatedButton.styleFrom(
-                primary: Color(0xFFD3A335), // Gold Color
-                padding: EdgeInsets.symmetric(horizontal: 100, vertical: 16),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text("SIGN IN"),
-                  SizedBox(width: 8),
-                  Icon(Icons.arrow_forward),
-                ],
-              ),
-            ),
+            // Sign in button with Firebase authentication
+            Obx(() {
+              return ElevatedButton(
+                onPressed: _authController.isLoading.value
+                    ? null
+                    : () {
+                        _authController.loginUser(
+                          _emailController.text,
+                          _passwordController.text,
+                        );
+                      },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(0xFFD3A335),
+                  padding: EdgeInsets.symmetric(horizontal: 100, vertical: 16),
+                ),
+                child: _authController.isLoading.value
+                    ? CircularProgressIndicator(color: Colors.white)
+                    : Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text("SIGN IN"),
+                          SizedBox(width: 8),
+                          Icon(Icons.arrow_forward),
+                        ],
+                      ),
+              );
+            }),
             SizedBox(height: 16),
             // Sign up text
             TextButton(
               onPressed: () {
-                // Navigate to Sign Up Page
                 Get.to(SignUpPage());
               },
               child: Text.rich(
@@ -96,15 +121,15 @@ class LoginPage extends StatelessWidget {
               ),
             ),
             SizedBox(height: 16),
-            // Facebook connect button
+            // Facebook connect button (dummy action)
             ElevatedButton.icon(
               onPressed: () {
-                // Add Facebook login action here
+                // Add Facebook login logic here
               },
               icon: Icon(Icons.facebook),
               label: Text("Connect with Facebook"),
               style: ElevatedButton.styleFrom(
-                primary: Colors.blue, // Facebook blue color
+                backgroundColor: Colors.blue,
                 padding: EdgeInsets.symmetric(horizontal: 40, vertical: 16),
               ),
             ),

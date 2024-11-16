@@ -1,17 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/app/data/services/notification_service.dart';
+import 'package:get/get.dart';
+import 'package:firebase_core/firebase_core.dart'; // Import Firebase Core
 import 'package:flutter_application_1/app/data/services/http_controller.dart';
 import 'package:flutter_application_1/app/modules/article_detail/bindings/article_detail_bindings.dart';
 import 'package:flutter_application_1/app/modules/article_detail/views/article_detail_view.dart';
 import 'package:flutter_application_1/app/modules/article_detail/views/article_detail_web_view.dart';
 import 'package:flutter_application_1/app/modules/home/views/home_view.dart';
-import 'package:get/get.dart';
+import 'app/routes/app_pages.dart';
 
-import 'app/routes/app_pages.dart'; // Pastikan path ini sesuai
+void main() async {
+  // Pastikan widget sudah diinisialisasi sebelum Firebase dijalankan
+  WidgetsFlutterBinding.ensureInitialized();
 
-void main() {
+  // Inisialisasi Firebase
+  await Firebase.initializeApp();
+  await NotificationService().initNotifications();
+
   // Inisialisasi HttpController di awal
   Get.put(HttpController());
-  
+
   runApp(MyApp());
 }
 

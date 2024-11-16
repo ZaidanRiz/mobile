@@ -7,6 +7,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -55,7 +56,7 @@ class HomePage extends StatelessWidget {
                   Get.to(LoginPage());
                 },
                 style: ElevatedButton.styleFrom(
-                  primary: Color(0xFFD3A335), // Gold Color
+                  backgroundColor: Color(0xFFD3A335), // Gold Color
                   padding: EdgeInsets.symmetric(horizontal: 40, vertical: 16),
                 ),
                 child: Text(
