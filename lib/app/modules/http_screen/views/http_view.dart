@@ -12,7 +12,7 @@ class HttpView extends GetView<HttpController> {
     return Scaffold(
         appBar: AppBar(
           title: const Text('Article Page'),
-          backgroundColor: Color(0xFFD3A335),
+          backgroundColor: const Color(0xFFD3A335),
         ),
         body: Obx(() {
           if (controller.isLoading.value) {

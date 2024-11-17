@@ -48,7 +48,7 @@ class StorageController extends GetxController {
         'Failed to upload image: $error',
         snackPosition: SnackPosition.TOP,
       );
-      throw error;
+      rethrow;
     }
   }
 
@@ -96,7 +96,7 @@ class StorageController extends GetxController {
         'Failed to delete image: $error',
         snackPosition: SnackPosition.BOTTOM,
       );
-      throw error;
+      rethrow;
     }
   }
 

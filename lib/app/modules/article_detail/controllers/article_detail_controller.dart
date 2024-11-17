@@ -4,10 +4,6 @@ import 'package:webview_flutter/webview_flutter.dart';
 class ArticleDetailController extends GetxController {
   late WebViewController webViewController;
 
-  @override
-  void onInit() {
-    super.onInit();
-  }
 
   WebViewController initializeWebView(String uri) {
     webViewController = WebViewController()
@@ -16,8 +12,4 @@ class ArticleDetailController extends GetxController {
     return webViewController;
   }
 
-  @override
-  void onClose() {
-    super.onClose();
-  }
 }

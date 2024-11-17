@@ -1,14 +1,19 @@
 buildscript {
-    ext.kotlin_version = '1.7.10'
+    ext.kotlin_version = '1.7.10'  // Update to the desired compatible Kotlin version
     repositories {
         google()
         mavenCentral()
     }
-
     dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"  // Using the variable for Kotlin version
     }
 }
+
+
+
+
+
+
 
 allprojects {
     repositories {

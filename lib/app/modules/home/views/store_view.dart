@@ -8,6 +8,8 @@ import 'profile_view.dart';
 import 'wishlist_view.dart';
 
 class StorePage extends StatefulWidget {
+  const StorePage({super.key});
+
   @override
   _StorePageState createState() => _StorePageState();
 }
@@ -25,7 +27,7 @@ class _StorePageState extends State<StorePage> {
         snackPosition: SnackPosition.TOP,
         backgroundColor: Colors.white,
         colorText: Colors.black,
-        duration: Duration(seconds: 2),
+        duration: const Duration(seconds: 2),
       );
     });
   }
@@ -41,7 +43,7 @@ class _StorePageState extends State<StorePage> {
             case 1:
               return WishlistPage(wishlist: wishlist);
             case 2:
-              return CartPage();
+              return const CartPage();
             default:
               return _buildHomePage(context);
           }
@@ -49,10 +51,10 @@ class _StorePageState extends State<StorePage> {
         bottomNavigationBar: Obx(() => BottomNavigationBar(
               currentIndex: homeController.currentIndex.value,
               onTap: (index) => homeController.changePage(index),
-              selectedItemColor: Color(0xFFD3A335),
+              selectedItemColor: const Color(0xFFD3A335),
               unselectedItemColor: Colors.grey,
               backgroundColor: Colors.white,
-              items: [
+              items: const [
                 BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
                 BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Wishlist'),
                 BottomNavigationBarItem(icon: Icon(Icons.shopping_cart), label: 'Cart'),
@@ -67,10 +69,10 @@ class _StorePageState extends State<StorePage> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: Color(0xFFD3A335),
+        backgroundColor: const Color(0xFFD3A335),
         elevation: 0,
         centerTitle: true,
-        title: Text(
+        title: const Text(
           "Sneaker Space",
           style: TextStyle(
             fontSize: 20,
@@ -80,10 +82,10 @@ class _StorePageState extends State<StorePage> {
         ),
         leading: GestureDetector(
           onTap: () {
-            Get.to(ChatPage());
+            Get.to(const ChatPage());
           },
-          child: Padding(
-            padding: const EdgeInsets.only(left: 16.0),
+          child: const Padding(
+            padding: EdgeInsets.only(left: 16.0),
             child: Icon(
               Icons.chat,
               color: Colors.white,
@@ -96,13 +98,13 @@ class _StorePageState extends State<StorePage> {
               Get.to(ProfilePage(), arguments: {
                 });
             },
-            child: CircleAvatar(
+            child: const CircleAvatar(
               radius: 16,
               backgroundColor: Colors.transparent,
               child: Icon(Icons.person, color: Colors.white),
             ),
           ),
-          SizedBox(width: 16),
+          const SizedBox(width: 16),
         ],
       ),
       body: SingleChildScrollView(
@@ -113,7 +115,7 @@ class _StorePageState extends State<StorePage> {
             TextField(
               decoration: InputDecoration(
                 hintText: 'What are you looking for?',
-                prefixIcon: Icon(Icons.search),
+                prefixIcon: const Icon(Icons.search),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8.0),
                 ),
@@ -121,22 +123,22 @@ class _StorePageState extends State<StorePage> {
                 fillColor: Colors.grey[200],
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             _buildBanner(),
-            SizedBox(height: 24),
+            const SizedBox(height: 24),
             _buildBrandSection(),
-            SizedBox(height: 24),
+            const SizedBox(height: 24),
             _buildNewArrivalSection(),
-            SizedBox(height: 24),
+            const SizedBox(height: 24),
             Center(
               child: ElevatedButton(
                 onPressed: () {
-                  Get.to(HttpView());
+                  Get.to(const HttpView());
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFFD3A335),
+                  backgroundColor: const Color(0xFFD3A335),
                 ),
-                child: Text('Visit Article'),
+                child: const Text('Visit Article'),
               ),
             ),
           ],
@@ -148,7 +150,7 @@ class _StorePageState extends State<StorePage> {
   Widget _buildBanner() {
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
         border: Border.all(width: 1, color: Colors.black),
         color: Colors.white,
@@ -160,7 +162,7 @@ class _StorePageState extends State<StorePage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   "Air Jordan 1 X Travis Scott",
                   style: TextStyle(
                     color: Colors.black,
@@ -168,26 +170,26 @@ class _StorePageState extends State<StorePage> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 8),
-                Text(
+                const SizedBox(height: 8),
+                const Text(
                   "DISCOUNT 20%",
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 16,
                   ),
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 ElevatedButton(
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFFD3A335),
+                    backgroundColor: const Color(0xFFD3A335),
                   ),
-                  child: Text("Shop Now"),
+                  child: const Text("Shop Now"),
                 ),
               ],
             ),
           ),
-          SizedBox(width: 16),
+          const SizedBox(width: 16),
           Image.asset(
             'assets/Jordan-1-High-OG-Travis-Scott-x-Fragment-1.png',
             width: 150,
@@ -205,7 +207,7 @@ class _StorePageState extends State<StorePage> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
+            const Text(
               "Brand",
               style: TextStyle(
                 fontSize: 18,
@@ -214,11 +216,11 @@ class _StorePageState extends State<StorePage> {
             ),
             TextButton(
               onPressed: () {},
-              child: Text("See all"),
+              child: const Text("See all"),
             ),
           ],
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
@@ -255,14 +257,14 @@ class _StorePageState extends State<StorePage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        const Text(
           "New Arrival",
           style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
           ),
         ),
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
@@ -297,48 +299,48 @@ class _StorePageState extends State<StorePage> {
             height: 100,
             fit: BoxFit.contain,
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           Text(
             title,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(height: 4),
+          const SizedBox(height: 4),
           Text(
-            "\IDR $price",
-            style: TextStyle(
+            "IDR $price",
+            style: const TextStyle(
               fontSize: 14,
               color: Colors.grey,
             ),
           ),
-          SizedBox(height: 4),
+          const SizedBox(height: 4),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(
+              const Icon(
                 Icons.star,
                 color: Colors.amber,
               ),
               Text(
                 "$rating/5",
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 14,
                   color: Colors.grey,
                 ),
               ),
             ],
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           ElevatedButton(
             onPressed: () {
               _addToWishlist(title, assetPath);
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: Color(0xFFD3A335),
+              backgroundColor: const Color(0xFFD3A335),
             ),
-            child: Text("Add to Wishlist"),
+            child: const Text("Add to Wishlist"),
           ),
         ],
       ),

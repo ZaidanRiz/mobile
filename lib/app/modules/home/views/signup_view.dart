@@ -3,6 +3,8 @@ import 'package:flutter_application_1/app/modules/home/controllers/auth_controll
 import 'package:get/get.dart';
 
 class SignUpPage extends StatefulWidget {
+  const SignUpPage({super.key});
+
   @override
   _SignUpPageState createState() => _SignUpPageState();
 }
@@ -29,7 +31,7 @@ class _SignUpPageState extends State<SignUpPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(Icons.location_on),
@@ -37,15 +39,15 @@ class _SignUpPageState extends State<SignUpPage> {
                 Text("Malang, Indonesia"),
               ],
             ),
-            SizedBox(height: 24),
-            Text(
+            const SizedBox(height: 24),
+            const Text(
               "Getting Started",
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(
               "Create an account to continue!",
               style: TextStyle(
@@ -53,28 +55,28 @@ class _SignUpPageState extends State<SignUpPage> {
                 color: Colors.grey[700],
               ),
             ),
-            SizedBox(height: 32),
+            const SizedBox(height: 32),
             // Email field
             TextField(
               controller: _emailController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Email',
                 prefixIcon: Icon(Icons.email),
                 border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             // Password field
             TextField(
               controller: _passwordController,
               obscureText: true,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Password',
                 prefixIcon: Icon(Icons.lock),
                 border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: 24),
+            const SizedBox(height: 24),
             // Terms and conditions checkbox
             Row(
               children: [
@@ -84,7 +86,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
                 GestureDetector(
                   onTap: () {},
-                  child: Text(
+                  child: const Text(
                     "Agree to our Terms & Conditions",
                     style: TextStyle(
                       decoration: TextDecoration.underline,
@@ -93,7 +95,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
               ],
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             // Sign up button
             Obx(() {
               return ElevatedButton(
@@ -106,12 +108,12 @@ class _SignUpPageState extends State<SignUpPage> {
                         );
                       },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFFD3A335), // Gold color
-                  padding: EdgeInsets.symmetric(horizontal: 100, vertical: 16),
+                  backgroundColor: const Color(0xFFD3A335), // Gold color
+                  padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 16),
                 ),
                 child: _authController.isLoading.value
-                    ? CircularProgressIndicator()
-                    : Row(
+                    ? const CircularProgressIndicator()
+                    : const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text("SIGN UP"),
@@ -121,13 +123,13 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
               );
             }),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             // Already have an account? Sign in text
             TextButton(
               onPressed: () {
                 Get.back(); // Navigate back to login page
               },
-              child: Text.rich(
+              child: const Text.rich(
                 TextSpan(
                   text: "Already have an account? ",
                   children: [

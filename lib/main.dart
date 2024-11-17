@@ -20,10 +20,12 @@ void main() async {
   // Inisialisasi HttpController di awal
   Get.put(HttpController());
 
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
@@ -33,7 +35,7 @@ class MyApp extends StatelessWidget {
         // Halaman utama
         GetPage(
           name: Routes.HOME,
-          page: () => HomePage(),
+          page: () => const HomePage(),
         ),
         // Halaman detail artikel dengan Binding untuk ArticleDetailController
         GetPage(

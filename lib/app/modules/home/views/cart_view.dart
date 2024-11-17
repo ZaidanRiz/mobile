@@ -16,14 +16,14 @@ class _CartPageState extends State<CartPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xFFD3A335),
+        backgroundColor: const Color(0xFFD3A335),
         centerTitle: true,
-        title: Text(
+        title: const Text(
           "Cart",
           style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
-            color: const Color.fromARGB(255, 0, 0, 0),
+            color: Color.fromARGB(255, 0, 0, 0),
           ),
         ),
       ),
@@ -49,10 +49,10 @@ class _CartPageState extends State<CartPage> {
             // Handle checkout
           },
           style: ElevatedButton.styleFrom(
-            backgroundColor: Color(0xFFD3A335),
-            padding: EdgeInsets.symmetric(vertical: 8.0),
+            backgroundColor: const Color(0xFFD3A335),
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
           ),
-          child: Text(
+          child: const Text(
             'CHECK OUT',
             style: TextStyle(fontSize: 18),
             selectionColor: Colors.white,
@@ -79,18 +79,18 @@ class _CartPageState extends State<CartPage> {
       ),
       child: Row(
         children: [
-          Placeholder(
+          const Placeholder(
             fallbackHeight: 60,
             fallbackWidth: 60,
           ), // Replace with Image widget for the product image
-          SizedBox(width: 16),
+          const SizedBox(width: 16),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Sneakers', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                Text('\IDR${prices[index]}'),
-                Text('Size: US 7'),
+                const Text('Sneakers', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                Text('IDR${prices[index]}'),
+                const Text('Size: US 7'),
               ],
             ),
           ),
@@ -102,7 +102,7 @@ class _CartPageState extends State<CartPage> {
                 }
               });
             },
-            icon: Icon(Icons.remove),
+            icon: const Icon(Icons.remove),
           ),
           Text('${quantities[index]}'), // Quantity
           IconButton(
@@ -111,7 +111,7 @@ class _CartPageState extends State<CartPage> {
                 quantities[index]++;
               });
             },
-            icon: Icon(Icons.add),
+            icon: const Icon(Icons.add),
           ),
           IconButton(
             onPressed: () {
@@ -120,7 +120,7 @@ class _CartPageState extends State<CartPage> {
                 prices.removeAt(index); // Remove the item from cart
               });
             },
-            icon: Icon(Icons.delete),
+            icon: const Icon(Icons.delete),
           ),
         ],
       ),
@@ -138,13 +138,13 @@ class _CartPageState extends State<CartPage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
+          const Text(
             'Total',
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
           Text(
-            '\IDR${totalPrice.toStringAsFixed(1)}', // Dynamically display total price
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            'IDR${totalPrice.toStringAsFixed(1)}', // Dynamically display total price
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
         ],
       ),

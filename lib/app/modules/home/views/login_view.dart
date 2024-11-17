@@ -4,6 +4,8 @@ import 'package:flutter_application_1/app/modules/home/views/signup_view.dart';
 import 'package:get/get.dart';
 
 class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
+
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
@@ -29,7 +31,7 @@ class _LoginPageState extends State<LoginPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(Icons.location_on),
@@ -37,15 +39,15 @@ class _LoginPageState extends State<LoginPage> {
                 Text("Malang, Indonesia"),
               ],
             ),
-            SizedBox(height: 24),
-            Text(
+            const SizedBox(height: 24),
+            const Text(
               "Let's Sign You In",
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(
               "Welcome back, you've been missed!",
               style: TextStyle(
@@ -53,28 +55,28 @@ class _LoginPageState extends State<LoginPage> {
                 color: Colors.grey[700],
               ),
             ),
-            SizedBox(height: 32),
+            const SizedBox(height: 32),
             // Email field
             TextField(
               controller: _emailController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Email',
                 prefixIcon: Icon(Icons.person),
                 border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             // Password field
             TextField(
               controller: _passwordController,
               obscureText: true,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Password',
                 prefixIcon: Icon(Icons.lock),
                 border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: 24),
+            const SizedBox(height: 24),
             // Sign in button with Firebase authentication
             Obx(() {
               return ElevatedButton(
@@ -87,12 +89,12 @@ class _LoginPageState extends State<LoginPage> {
                         );
                       },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFFD3A335),
-                  padding: EdgeInsets.symmetric(horizontal: 100, vertical: 16),
+                  backgroundColor: const Color(0xFFD3A335),
+                  padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 16),
                 ),
                 child: _authController.isLoading.value
-                    ? CircularProgressIndicator(color: Colors.white)
-                    : Row(
+                    ? const CircularProgressIndicator(color: Colors.white)
+                    : const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text("SIGN IN"),
@@ -102,13 +104,13 @@ class _LoginPageState extends State<LoginPage> {
                       ),
               );
             }),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             // Sign up text
             TextButton(
               onPressed: () {
-                Get.to(SignUpPage());
+                Get.to(const SignUpPage());
               },
-              child: Text.rich(
+              child: const Text.rich(
                 TextSpan(
                   text: "Don't have an account? ",
                   children: [
@@ -120,17 +122,17 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             // Facebook connect button (dummy action)
             ElevatedButton.icon(
               onPressed: () {
                 // Add Facebook login logic here
               },
-              icon: Icon(Icons.facebook),
-              label: Text("Connect with Facebook"),
+              icon: const Icon(Icons.facebook),
+              label: const Text("Connect with Facebook"),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.blue,
-                padding: EdgeInsets.symmetric(horizontal: 40, vertical: 16),
+                padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 16),
               ),
             ),
           ],

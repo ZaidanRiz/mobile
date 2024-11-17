@@ -10,6 +10,8 @@ class EditProfileView extends StatelessWidget {
   final ProfileController _profileController = Get.find<ProfileController>();
   final AuthController _authController = Get.find<AuthController>();
 
+  EditProfileView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,10 +20,10 @@ class EditProfileView extends StatelessWidget {
         elevation: 0,
         backgroundColor: Colors.white,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios, color: Colors.black87),
+          icon: const Icon(Icons.arrow_back_ios, color: Colors.black87),
           onPressed: () => Get.back(),
         ),
-        title: Text(
+        title: const Text(
           'Edit Profile',
           style: TextStyle(
             color: Colors.black87,
@@ -39,7 +41,7 @@ class EditProfileView extends StatelessWidget {
               Center(
                 child: GestureDetector(
                   onTap: () => _showImagePickerOptions(context),
-                  child: Container(
+                  child: SizedBox(
                     height: 100,
                     width: double.infinity,
                     child: Center(
@@ -83,26 +85,26 @@ class EditProfileView extends StatelessWidget {
                                   color: Colors.black.withOpacity(0.5),
                                   shape: BoxShape.circle,
                                 ),
-                                child: Center(
+                                child: const Center(
                                   child: CircularProgressIndicator(
                                     color: Colors.white,
                                   ),
                                 ),
                               );
                             }
-                            return SizedBox.shrink();
+                            return const SizedBox.shrink();
                           }),
 
                           Positioned(
                             bottom: 0,
                             right: 0,
                             child: Container(
-                              padding: EdgeInsets.all(4),
-                              decoration: BoxDecoration(
+                              padding: const EdgeInsets.all(4),
+                              decoration: const BoxDecoration(
                                 color: Color(0xFFD3A335),
                                 shape: BoxShape.circle,
                               ),
-                              child: Icon(
+                              child: const Icon(
                                 Icons.camera_alt,
                                 size: 20,
                                 color: Colors.white,
@@ -115,26 +117,26 @@ class EditProfileView extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 32),
+              const SizedBox(height: 32),
               _buildInputField(
                 controller: _editProfileController.nameController,
                 label: 'Full Name',
                 icon: Icons.person_outline,
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               _buildInputField(
                 controller: _editProfileController.usernameController,
                 label: 'Username',
                 icon: Icons.alternate_email,
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               // Read-only email field
               Obx(() => Container(
                     decoration: BoxDecoration(
                       color: Colors.grey[100],
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                     child: Row(
                       children: [
                         Icon(
@@ -142,7 +144,7 @@ class EditProfileView extends StatelessWidget {
                           color: Colors.grey[600],
                           size: 20,
                         ),
-                        SizedBox(width: 16),
+                        const SizedBox(width: 16),
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -154,10 +156,10 @@ class EditProfileView extends StatelessWidget {
                                   color: Colors.grey[600],
                                 ),
                               ),
-                              SizedBox(height: 4),
+                              const SizedBox(height: 4),
                               Text(
                                 _authController.userProfile['email'] ?? '',
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 16,
                                   color: Colors.black87,
                                 ),
@@ -168,17 +170,17 @@ class EditProfileView extends StatelessWidget {
                       ],
                     ),
                   )),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               _buildInputField(
                 controller: _editProfileController.ageController,
                 label: 'Age',
                 icon: Icons.cake_outlined,
                 keyboardType: TextInputType.number,
               ),
-              SizedBox(height: 40),
+              const SizedBox(height: 40),
               Obx(() {
                 return _editProfileController.isLoading.value
-                    ? Center(child: CircularProgressIndicator(
+                    ? const Center(child: CircularProgressIndicator(
                         color: Color(0xFFD3A335),
                       ))
                     : SizedBox(
@@ -190,13 +192,13 @@ class EditProfileView extends StatelessWidget {
                             Get.back();
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xFFD3A335),
+                            backgroundColor: const Color(0xFFD3A335),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12),
                             ),
                             elevation: 2,
                           ),
-                          child: Text(
+                          child: const Text(
                             'Save Changes',
                             style: TextStyle(
                               fontSize: 16,
@@ -221,24 +223,24 @@ class EditProfileView extends StatelessWidget {
           child: Wrap(
             children: <Widget>[
               ListTile(
-                leading: Icon(Icons.photo_library),
-                title: Text('Select Image from Gallery'),
+                leading: const Icon(Icons.photo_library),
+                title: const Text('Select Image from Gallery'),
                 onTap: () {
                   _profileController.selectImageFromGallery();
                   Navigator.of(context).pop();
                 },
               ),
               ListTile(
-                leading: Icon(Icons.photo_camera),
-                title: Text('Take Picture'),
+                leading: const Icon(Icons.photo_camera),
+                title: const Text('Take Picture'),
                 onTap: () {
                   _profileController.takePicture();
                   Navigator.of(context).pop();
                 },
               ),
               ListTile(
-                leading: Icon(Icons.delete),
-                title: Text('Delete Photo'),
+                leading: const Icon(Icons.delete),
+                title: const Text('Delete Photo'),
                 onTap: () {
                   _profileController.deletePhoto();
                   Navigator.of(context).pop();
@@ -262,7 +264,7 @@ class EditProfileView extends StatelessWidget {
         color: Colors.grey[100],
         borderRadius: BorderRadius.circular(12),
       ),
-      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
       child: TextField(
         controller: controller,
         keyboardType: keyboardType,

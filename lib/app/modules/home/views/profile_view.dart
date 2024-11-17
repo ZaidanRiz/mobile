@@ -11,7 +11,7 @@ class ProfilePage extends StatelessWidget {
   final AuthController _authController = Get.put(AuthController());
   final StorageController storageController = Get.put(StorageController());
   
-  ProfilePage() {
+  ProfilePage({super.key}) {
     // Fetch user profile data when ProfilePage loads
     _authController.fetchUserProfile();
   }
@@ -21,14 +21,14 @@ class ProfilePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Color(0xFFD3A335),
+        backgroundColor: const Color(0xFFD3A335),
         elevation: 0,
-        title: Text('Profile'),
+        title: const Text('Profile'),
       ),
       body: Obx(() {
         // Show loading indicator for the whole page if profile is loading
         if (profileController.isLoading.value) {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(
               color: Color(0xFFD3A335),
             ),
@@ -39,14 +39,14 @@ class ProfilePage extends StatelessWidget {
           children: [
             // Profile picture and info section
             Container(
-              color: Color(0xFFD3A335),
-              padding: EdgeInsets.all(16.0),
+              color: const Color(0xFFD3A335),
+              padding: const EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   GestureDetector(
                     onTap: () => _showFullImage(context),
-                    child: Container(
+                    child: SizedBox(
                       height: 100,
                       width: double.infinity,
                       child: Center(
@@ -62,7 +62,7 @@ class ProfilePage extends StatelessWidget {
                                     ),
                                   )
                                 : profileController.selectedImagePath.value.isEmpty
-                                    ? CircleAvatar(
+                                    ? const CircleAvatar(
                                         radius: 50,
                                         backgroundColor: Colors.black,
                                         child: Icon(Icons.person, size: 50, color: Colors.white),
@@ -81,7 +81,7 @@ class ProfilePage extends StatelessWidget {
                                   color: Colors.black.withOpacity(0.5),
                                   shape: BoxShape.circle,
                                 ),
-                                child: Center(
+                                child: const Center(
                                   child: CircularProgressIndicator(
                                     color: Colors.white,
                                   ),
@@ -92,47 +92,47 @@ class ProfilePage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Center(
                     child: Text(
                       _authController.userProfile['username'] ?? '',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                       ),
                     ),
                   ),
-                  SizedBox(height: 5),
+                  const SizedBox(height: 5),
                   Center(
                     child: Text(
                       _authController.userProfile['name'] ?? '',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 16,
                         color: Colors.white,
                       ),
                     ),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                 ],
               ),
             ),
-            SizedBox(height: 24),
+            const SizedBox(height: 24),
 
             // My Account section
             ListTile(
-              leading: Icon(Icons.person),
-              title: Text('My Account'),
-              subtitle: Text('Edit your information'),
-              trailing: Icon(Icons.arrow_forward),
+              leading: const Icon(Icons.person),
+              title: const Text('My Account'),
+              subtitle: const Text('Edit your information'),
+              trailing: const Icon(Icons.arrow_forward),
               onTap: () {
                 Get.to(() => EditProfileView());  // Navigate to EditProfileView
               },
             ),
 
             ListTile(
-              leading: Icon(Icons.logout),
-              title: Text('Logout'),
+              leading: const Icon(Icons.logout),
+              title: const Text('Logout'),
               onTap: () async {
                 await _authController.logout();
               },
@@ -152,7 +152,7 @@ class ProfilePage extends StatelessWidget {
           child: _authController.userProfile['profileImageUrl'] != null
               ? Image.network(_authController.userProfile['profileImageUrl'])
               : profileController.selectedImagePath.value.isEmpty
-                  ? Icon(Icons.person, size: 100)
+                  ? const Icon(Icons.person, size: 100)
                   : Image.file(File(profileController.selectedImagePath.value)),
         );
       },

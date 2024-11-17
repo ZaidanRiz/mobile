@@ -4,6 +4,8 @@ import 'package:flutter_application_1/app/modules/home/views/login_view.dart';
 import 'package:get/get.dart';
 
 class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,9 +20,9 @@ class HomePage extends StatelessWidget {
               Container(
                 width: 275,
                 height: 275,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   shape: BoxShape.circle,
-                  color: const Color.fromARGB(255, 255, 255, 255),
+                  color: Color.fromARGB(255, 255, 255, 255),
                 ),
                 child: Center(
                   child: Image.asset(
@@ -29,16 +31,16 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 24),
+              const SizedBox(height: 24),
               // Welcome Text
-              Text(
+              const Text(
                 "Welcome to Sneaker Space!",
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               // Subtitle
               Text(
                 "Explore the Sneaker Space, Discover Your Dream Shoes!",
@@ -48,18 +50,18 @@ class HomePage extends StatelessWidget {
                   color: Colors.grey[700],
                 ),
               ),
-              SizedBox(height: 32),
+              const SizedBox(height: 32),
               // Get Started Button
               ElevatedButton(
                 onPressed: () {
                   // Navigate to login page
-                  Get.to(LoginPage());
+                  Get.to(const LoginPage());
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFFD3A335), // Gold Color
-                  padding: EdgeInsets.symmetric(horizontal: 40, vertical: 16),
+                  backgroundColor: const Color(0xFFD3A335), // Gold Color
+                  padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 16),
                 ),
-                child: Text(
+                child: const Text(
                   "GET STARTED",
                   style: TextStyle(
                     color: Colors.white,

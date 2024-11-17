@@ -13,6 +13,7 @@ import 'package:flutter_application_1/app/modules/http_screen/views/http_view.da
 import 'package:get/get.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/home/views/microphone_view.dart';
 
 part 'app_routes.dart';
 
@@ -24,21 +25,21 @@ class AppPages {
   static final routes = [
     GetPage(
       name: _Paths.HOME,
-      page: () => HomePage(),
+      page: () => const HomePage(),
       binding: HomeBinding(),
     ),
     // Add more routes here
     GetPage(
       name: _Paths.LOGIN,
-      page: () => LoginPage(),
+      page: () => const LoginPage(),
     ),
     GetPage(
       name: _Paths.SIGNUP,
-      page: () => SignUpPage(),
+      page: () => const SignUpPage(),
     ),
     GetPage(
       name: _Paths.STORE,
-      page: () => StorePage(),
+      page: () => const StorePage(),
     ),
     GetPage(
       name: _Paths.PROFILE,
@@ -46,15 +47,15 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.CART,
-      page: () => CartPage(),
+      page: () => const CartPage(),
     ),
     GetPage(
       name: _Paths.CHAT,
-      page: () => ChatPage(),
+      page: () => const ChatPage(),
     ),
     GetPage(
       name: _Paths.WISHLIST,
-      page: () => WishlistPage(wishlist: const [],),
+      page: () => const WishlistPage(wishlist: [],),
     ),
 
     GetPage(
@@ -73,6 +74,11 @@ class AppPages {
       page: () => ArticleDetailWebView(article: Get.arguments),
       binding: ArticleDetailBinding(),
     ),
+    GetPage(
+     name: _Paths.MICROPHONE,
+      page: () => MicrophonePage(),
+    ),
+
     // Add more routes as needed
   ];
 }

@@ -10,7 +10,7 @@ class WishlistItem {
 class WishlistPage extends StatefulWidget {
   final List<WishlistItem> wishlist;
 
-  WishlistPage({required this.wishlist});
+  const WishlistPage({super.key, required this.wishlist});
 
   @override
   _WishlistPageState createState() => _WishlistPageState();
@@ -28,14 +28,14 @@ class _WishlistPageState extends State<WishlistPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Color(0xFFD3A335),
+        backgroundColor: const Color(0xFFD3A335),
         centerTitle: true,
-        title: Text(
+        title: const Text(
           "Wishlist",
           style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
-            color: const Color.fromARGB(255, 0, 0, 0),
+            color: Color.fromARGB(255, 0, 0, 0),
           ),
         ),
       ),
@@ -47,7 +47,7 @@ class _WishlistPageState extends State<WishlistPage> {
             leading: Image.asset(item.imagePath, width: 50, height: 50),
             title: Text(item.name),
             trailing: IconButton(
-              icon: Icon(Icons.delete, color: Colors.red),
+              icon: const Icon(Icons.delete, color: Colors.red),
               onPressed: () => _removeFromWishlist(index),
             ),
           );

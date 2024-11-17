@@ -27,7 +27,7 @@ class AuthController extends GetxController {
       }
 
       Get.snackbar('Berhasil', 'Login berhasil!', backgroundColor: Colors.green, colorText: Colors.white);
-      Get.offAll(() => StorePage());
+      Get.offAll(() => const StorePage());
     } on FirebaseAuthException {
       // Menampilkan pesan error yang seragam untuk setiap kesalahan login
       Get.snackbar(
@@ -59,7 +59,7 @@ class AuthController extends GetxController {
           'age': 0,
         });
         Get.snackbar('Berhasil', 'Pendaftaran berhasil!', backgroundColor: Colors.green, colorText: Colors.white);
-        Get.offAll(() => LoginPage());
+        Get.offAll(() => const LoginPage());
       }
     } on FirebaseAuthException catch (e) {
       String errorMessage;
@@ -120,7 +120,7 @@ class AuthController extends GetxController {
   // Logout
   Future<void> logout() async {
     await _auth.signOut();
-    Get.offAll(() => LoginPage());
+    Get.offAll(() => const LoginPage());
   }
 
   // Get current user
